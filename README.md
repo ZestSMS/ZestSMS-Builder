@@ -2,7 +2,7 @@
 Create post_meta or set terms for a post in a Beaver Builder module. 
 
 ## Usage
-Include zestsms-builder.php before your module, use the update function to pass data.
+Include zestsms-builder.php before your module, use the update function to pass data. This has __not__ been tested on multiple fields.
 
 __Please view examples.php__
 
