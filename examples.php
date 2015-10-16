@@ -3,11 +3,11 @@
 class ZestSMSExampleModule extends FLBuilderModule {
   public function __construct() {
     parent::__construct(array(
-      'name'          => __('Name / Title', 'fl-builder'),
-      'description'   => __('Display name and title for a team member', 'fl-builder'),
-      'category'		=> __('Custom Modules', 'fl-builder'),
-      'dir'           => ZESTSMS_MODULES_DIR . 'title/',
-      'url'           => ZESTSMS_MODULES_URL . 'title/'
+      'name'          => __('Example Module'),
+      'description'   => __('Set some post meta or terms with a BB module'),
+      'category'		=> __('Custom Modules'),
+      'dir'           => 'example-module/',
+      'url'           => 'example-module/'
     ));
   }
 
