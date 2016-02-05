@@ -33,11 +33,12 @@ final class ZestSMSBuilder {
 						if(!is_array($section_args['fields'])) continue;
 						foreach($section_args['fields'] as $field => $field_args) {
 							if($field_args['meta']) {
-								$key = (!is_bool($field_args['meta'])) ? $field_args['meta'] : $field;
+								$key = ($field_args['meta']['key']) ? $field_args['meta']['key'] : $field;
+								$val = ($field_args['meta']['value']) ? $field_args['meta']['value'] : $module->settings->$field;
 								if($return == 'meta') {
 									$meta[$module->node][$field] = array(
 										'key'	=> $key,
-										'val'	=> $module->settings->$field
+										'val'	=> $val
 									);
 								} else if($return == 'defaults') {
 									$meta[$module->slug . '-module'][$field] = $key;
