@@ -1,11 +1,20 @@
 # ZestSMS-Builder
-Create post_meta or set terms for a post in a Beaver Builder module. 
+Create post_meta or set terms for a post in a Beaver Builder module.
 
 ## Usage
-Include zestsms-builder.php before your module, use the update function to pass data. This has __not__ been tested on multiple=>true fields.
-
-__Please view examples.php__
-
-To create post_meta, pass an array with keys or key/value pairs. If only keys are supplied, the value of that Beaver Builder module field will be used.
-
-To set terms, pass an array with keys of Beaver Builder fields where a taxonomy is set (like the suggest field).
+Include class-zestsms-builder.php before your module and add a 'meta' attribute to your field settings array. 'meta' can be a string to use the field name as the meta key or a string for a custom key.
+```
+'my_field'    => array(
+  'type'    => 'text',
+  'label'   => __('My Field'),
+  'meta'    => true
+)
+```
+Or
+```
+'my_field'    => array(
+  'type'    => 'text',
+  'label'   => __('My Field'),
+  'meta'    => 'my-meta-key'
+)
+```
