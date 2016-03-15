@@ -99,8 +99,8 @@ final class ZestSMSBuilder {
 								}
 							}
 
-							if($meta_value[$node_id]->settings->$field) unset($meta_value[$node_id]->settings->$field);
-							if($draft[$node_id]->settings->$field) unset($draft[$node_id]->settings->$field);
+							if(isset($meta_value[$node_id]->settings->$field)) unset($meta_value[$node_id]->settings->$field);
+							if(isset($draft[$node_id]->settings->$field)) unset($draft[$node_id]->settings->$field);
 						}
 					}
 				}
