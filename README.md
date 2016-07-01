@@ -5,7 +5,7 @@ Create post_meta or set terms for a post in a Beaver Builder module.
 Include class-zestsms-builder.php before your module.
 
 ### Meta Data
-Add the 'meta' attribute to your field settings array. 'meta' can be a an array to use the field name as the meta key or a string for a custom key.
+Add a 'meta' attribute to your field settings array. 'meta' can be boolean or an array. If 'meta' is true, the meta key will be the name of the field -- 'my_field' in the example below.
 ```
 'my_field'    => array(
   'type'    => 'text',
@@ -13,7 +13,7 @@ Add the 'meta' attribute to your field settings array. 'meta' can be a an array 
   'meta'    => true
 )
 ```
-Or
+Or set a custom key with an array:
 ```
 'my_field'    => array(
   'type'    => 'text',
