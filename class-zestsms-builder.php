@@ -22,6 +22,9 @@ final class ZestSMSBuilder {
 							if($type == 'taxonomy') {
 								$defaults->$field = wp_get_post_terms($post->ID, $default['key'], array("fields" => "ids"));
 							}
+							if($type == 'wp_option') {
+								$defaults->$field = get_option($default['key']);
+							}
 						}
 					}
 				}
@@ -41,11 +44,11 @@ final class ZestSMSBuilder {
 					foreach($tab_args['sections'] as $section => $section_args) {
 						if(!is_array($section_args['fields'])) continue;
 						foreach($section_args['fields'] as $field => $field_args) {
-							if($field_args['meta'] || $field_args['taxonomy']) {
-								if($field_args['meta']) {
-									$type = 'meta';
-									$key = ($field_args['meta']['key']) ? $field_args['meta']['key'] : $field;
-									$val = ($field_args['meta']['value']) ? $field_args['meta']['value'] : $module->settings->$field;
+							if($field_args['meta'] || $field_args['taxonomy'] || $field_args['wp_option']) {
+								if($field_args['meta'] || $field_args['wp_option']) {
+									$type = ($field_args['meta']) ? 'meta' : 'wp_option';
+									$key = ($field_args[$type]['key']) ? $field_args[$type]['key'] : $field;
+									$val = ($field_args[$type]['value']) ? $field_args[$type]['value'] : $module->settings->$field;
 								}
 								if($field_args['taxonomy']) {
 									$type = 'taxonomy';
@@ -96,6 +99,9 @@ final class ZestSMSBuilder {
 								}
 								if($type == 'taxonomy') {
 									wp_set_post_terms($post_id, $args['val'], $args['key']);
+								}
+								if($type == 'wp_option') {
+									update_option($args['key'], $args['val']);
 								}
 							}
 
