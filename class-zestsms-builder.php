@@ -138,18 +138,20 @@ final class ZestSMSBuilder {
 										// Loop through old posts, unset if removed
 										if ( $compare_to_old = array_diff( $old_save_to_posts, $new_save_to_posts ) ) {
 											foreach ( $compare_to_old as $id ) {
-												$post_meta = get_post_meta( $id, $key, true );
+												if ( $post_meta = get_post_meta( $id, $key, true ) ) {
 
-												$remove_key = array_search( $post_id, $post_meta );
-												unset( $post_meta[ $remove_key ] );
+													$remove_key = array_search( $post_id, $post_meta );
+													unset( $post_meta[ $remove_key ] );
 
-												update_post_meta( $id, $key, $post_meta );
+													update_post_meta( $id, $key, $post_meta );
+												}
 											}
 										}
 
 										// Loop through updated posts, set new ones
 										if ( $compare_to_new = array_diff( $new_save_to_posts, $old_save_to_posts ) ) {
 											foreach ( $compare_to_new as $id ) {
+												$post_meta   = array();
 												$post_meta   = get_post_meta( $id, $key, true );
 												$post_meta[] = $post_id;
 
