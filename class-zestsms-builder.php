@@ -52,10 +52,10 @@ final class ZestSMSBuilder {
 								foreach ( $section_args['fields'] as $field => $field_args ) {
 									if ( isset( $field_args['meta'] ) || isset( $field_args['taxonomy'] ) || isset( $field_args['wp_option'] ) ) {
 										if ( isset( $field_args['meta'] ) || isset( $field_args['wp_option'] ) ) {
-											$type             = ( isset( $field_args['meta'] ) ) ? 'meta' : 'wp_option';
-											$key              = ( isset( $field_args[ $type ]['key'] ) ) ? $field_args[ $type ]['key'] : $field;
-											$val              = '';
-											$save_to_post     = ( $field_args[ $type ]['save_to_post'] ) ? true : false;
+											$type         = ( isset( $field_args['meta'] ) ) ? 'meta' : 'wp_option';
+											$key          = ( isset( $field_args[ $type ]['key'] ) ) ? $field_args[ $type ]['key'] : $field;
+											$val          = '';
+											$save_to_post = ( $field_args[ $type ]['save_to_post'] ) ? true : false;
 											if ( $save_to_post ) {
 												$save_to_post = ( isset( $field_args[ $type ]['save_to_post']['key'] ) ) ? $field_args[ $type ]['save_to_post']['key'] : $field_args[ $type ]['key'];
 											}
@@ -78,9 +78,9 @@ final class ZestSMSBuilder {
 
 										// Update the database
 										$fields[ $module->node ][ $type ][ $field ] = array(
-											'key'              => $key,
-											'val'              => $val,
-											'save_to_post'     => $save_to_post
+											'key'          => $key,
+											'val'          => $val,
+											'save_to_post' => $save_to_post
 										);
 										// Set defaults
 										$fields['defaults'][ $module->slug . '-module' ][ $type ][ $field ] = array(
@@ -125,9 +125,15 @@ final class ZestSMSBuilder {
 							if ( 'fl-builder-template' !== get_post_type( $post_id ) ) {
 								if ( $type == 'meta' ) {
 									if ( isset( $args['save_to_post'] ) ) {
-										$key = $args['save_to_post'];
+										$key               = $args['save_to_post'];
 										$new_save_to_posts = $args['val'];
 										$old_save_to_posts = get_post_meta( $post_id, $args['key'], $args['val'] );
+										if ( ! $old_save_to_posts ) {
+											$old_save_to_posts = array();
+										}
+										if ( ! $new_save_to_posts ) {
+											$new_save_to_posts = array();
+										}
 
 										// Loop through old posts, unset if removed
 										if ( $compare_to_old = array_diff( $old_save_to_posts, $new_save_to_posts ) ) {
